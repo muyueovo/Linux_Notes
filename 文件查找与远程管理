@@ -33,6 +33,29 @@ locate查找文件hosts文件：# locate hosts
 ##语法⭐find [path...] [options]  [expression] 				[action]
         命令 路径       选项             表达式        动作
 
+-i忽略大小写
+-name按文件名查找
+-size按文件大小查找
+
+# find /etc -size +5M
+# find /etc -size 5M
+# find /etc -size -5M
+
++5M		文件>5M
+5M		文件=5M
+-5M		文件<5M
+
+# 生成指定大小的文件 if是从哪个文件中获取内容，of是将获取的内容写入到哪个文件
+# bs是每次写入多大的内容，count是写几次
+# dd if=/dev/zero of=/etc/1.txt bs=1M count=5
+
+# 需求：查询/etc中大小是3M的文件，并且将查找的文件详细展示出来
+# find /etc -size 3M | xargs ls -lh
+
+-maxdepth （数字） 查找的目录深度
+
+
+
 
 
 
