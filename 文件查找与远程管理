@@ -8,7 +8,7 @@
 ##用 ls -lhd 目录 看到的目录大小，只是目录本身存储 “文件名 + inode 号” 的 block 大小（通常只有 4KB），
 完全不包含里面文件的真实大小！！
 ls -lhd 目录	目录本身的 block 大小（只存目录项）
-du -sh 目录	目录 + 所有子文件 / 子目录的总占用空间
+du -sh 目录	目录 + 所有子文件 / 子目录的总占用空间，递归计算目录+所有子内容的真实磁盘占用，是运维/排查的标准用法。
 
 ## rm etc*   删除etc开头的所有文件
 
@@ -18,8 +18,20 @@ which	|查找命令/可执行文件 路径	 |只搜索 $PATH 目录	  |极快	  
 locate|快速按文件名搜文件 / 目录	 |全系统（依赖数据库）	|很快	            |非实时，新文件需 updatedb
 find	|强大、精确搜索文件 / 目录	 |任意指定目录	        |较慢（实时扫盘）	|支持按名称、类型、权限、时间、用户等条件查找
 
-##在/usr/bin/目录（所有在 PATH 里的目录）中创建一个文件，在给文件执行权限x后，也可以通过which找到
-##
+##1.1
+/usr/bin/目录（所有在 PATH 里的目录）中创建一个文件，在给文件执行权限x后，也可以通过which找到
+##1.2.1
+locate查找文件hosts文件：# locate hosts
+更新locate数据库：updatedb
+案例：# touch hello.txt
+# locate hello.txt
+'''发现找不到这个文件'''
+# updatedb
+# locate hello.txt
+'''可以找到文件了'''
+
+##语法⭐find [path...] [options]  [expression] 				[action]
+        命令 路径       选项             表达式        动作
 
 
 
